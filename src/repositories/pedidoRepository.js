@@ -227,6 +227,16 @@ const pedidoRepository = {
         try {
             await conn.beginTransaction();
 
+            // Verificar se o pedido existe antes de inserir o item
+            const [pedidoRows] = await conn.execute(
+                "SELECT id FROM pedidos WHERE id = ?",
+                [pedidoId]
+            );
+
+            if (!pedidoRows || pedidoRows.length === 0) {
+                throw new Error("Pedido não encontrado");
+            }
+
             const [produto] = await conn.execute(
                 "SELECT preco FROM produtos WHERE id = ?",
                 [item.produtoId]

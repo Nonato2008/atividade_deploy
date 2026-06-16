@@ -144,12 +144,18 @@ const pedidoController = {
 
             const item = ItensPedido.criar({ produtoId, quantidade });
 
-            const result = await pedidoRepository.adicionarItem(id, item);
-
-            return res.status(200).json({
-                message: "Item adicionado",
-                data: result
-            });
+            try {
+                const result = await pedidoRepository.adicionarItem(id, item);
+                return res.status(200).json({
+                    message: "Item adicionado",
+                    data: result
+                });
+            } catch (err) {
+                if (err.message === 'Pedido não encontrado') {
+                    return res.status(404).json({ message: 'Pedido não encontrado' });
+                }
+                throw err;
+            }
 
         } catch (error) {
             return res.status(500).json({
