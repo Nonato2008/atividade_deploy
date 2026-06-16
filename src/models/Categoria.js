@@ -46,8 +46,8 @@ export class Categoria{
         }
     }
     #validarDescricao(value) {
-        if(value && (value.trim().length < 10 || value.trim().length > 100)){
-            throw new Error ('O campo descrição e deve ter entre 10 a 100 caracteres');           
+        if(!value || value.trim().length < 10 || value.trim().length > 100 ){
+            throw new Error ('O campo descrição é obrigatório e deve ter entre 10 a 100 caracteres');           
         }
     }
 
