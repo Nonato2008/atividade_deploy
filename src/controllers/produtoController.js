@@ -7,9 +7,9 @@ const produtoController = {
             if (!req.file) {
                 return res.status(400).json({ message: 'Imagem não foi enviada' });
             }
-            const { idCategoria, nome, preco, quantidade, descricao } = req.body;
+            const { idCategoria, nome, valor, quantidade, descricao } = req.body;
             const image = req.file.filename;
-             const produto = Produtos.criar({ idCategoria, nome, descricao, preco, image, quantidade });
+             const produto = Produtos.criar({ idCategoria, nome, descricao, valor, image, quantidade });
             const result = await produtosRepository.criar(produto);
             res.status(201).json({ result });
 
