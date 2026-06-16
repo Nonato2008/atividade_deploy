@@ -15,7 +15,10 @@ class Database {
             port: process.env.DB_PORT,
             waitForConnections: true,
             connectionLimit: 100,
-            queueLimit: 0
+            queueLimit: 0,
+            ssl: {
+                rejectUnauthorized: false
+            }
         });
     }
 
@@ -101,9 +104,12 @@ export async function initializeDatabase() {
             );
         `);
 
+        
+
         await tempConnection.end();
         console.log("Banco de dados e tabelas verificados/criados com sucesso.");
     } catch (error) {
+        
         console.error("Erro ao criar o banco ou as tabelas:", error);
         throw error;
     }
