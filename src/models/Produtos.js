@@ -71,12 +71,12 @@ export class Produtos{
     //metodos auxiliares
 
     #validaridProduto(value){
-        if(value & value <= 0){
+        if (!value || value <= 0) {
             throw new Error ('Verifique o ID informado')
         }
     }
     #validarIdCategoria(value){
-        if(value & value <= 0){
+        if (!value || value <= 0) {
             throw new Error ('Verifique o ID da Categoria')
         }
     }
@@ -85,7 +85,7 @@ export class Produtos{
             throw new Error ('O campo nome é obrigatório e deve ter entre 3 a 45 caracteres');           
         }
     }
-    #validarDescricao(value) {
+    #validarDescricao(value) {  
         if(value && (value.trim().length < 10 || value.trim().length > 100)){
             throw new Error ('O campo descrição e deve ter entre 10 a 100 caracteres');           
         }
